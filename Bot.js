@@ -1,18 +1,49 @@
-var Session = require("./Session.js"),
+var	Session = require("./Session.js"),
 	util = require("util"),
 	events = require("events");
 
-var Bot = function() {
-	
+var Bot = function(settings) {
+
+	var initModules = function(modules) {
+		var arr = [];
+		if(!Array.isArray(modules))
+			return arr;
+		for(var m in modules) {
+			if(typeof modules[m] != "string")
+				continue;
+			arr.push(
+				require(
+					"./bot_modules/" + modules[m] + "/index.js"
+				)
+			);
+		}
+		return arr;
+	}
+
 	var properties = {
-		'name' : "",
-		'status' : ""
+		'name' :
+			(typeof settings.name == "string")
+			?
+			settings.name
+			:
+			"node-xmpp-bot",
+		'status' :
+			(typeof settings.status == "string")
+			?
+			settings.status
+			:
+			"I am a bot",
+		'modules' : initModules(settings.modules)
 	};
 
 	var sessions = [];
 
 	this.addSession = function(options) {
+		options.server.alias = properties.name;
+		options.server.status = properties.status;
 		var session = new Session(options.server);
+		for(var m in properties.modules)
+			var module = properties.modules[m].call(session);
 		session.on(
 			'online',
 			function() {
@@ -20,20 +51,6 @@ var Bot = function() {
 					for(var room in options.rooms)
 						session.joinRoom(options.rooms[room]);
 				}
-				if(typeof options.onConnect == "function")
-					options.onConnect.call(session);
-			}
-		);
-		session.on(
-			'message',
-			function(message) {
-				options.onMessage.call(session, message);
-			}
-		);
-		session.on(
-			'presence',
-			function(presence) {
-				options.onPresence.call(session, presence);
 			}
 		);
 		sessions.push(session);

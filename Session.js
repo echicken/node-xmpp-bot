@@ -29,13 +29,7 @@ var Session = function(options) {
 	);
 	this.__defineSetter__('jid', function(){});
 
-	this.__defineGetter__(
-		'status',
-		function() {
-			return settings.status;
-		}
-	);
-
+	this.__defineGetter__('status',	function() { return settings.status; });
 	this.__defineSetter__(
 		'status',
 		function(status) {
@@ -50,20 +44,10 @@ var Session = function(options) {
 		}
 	);
 
-	this.__defineGetter__(
-		'roster',
-		function() {
-			return roster;
-		}
-	);
+	this.__defineGetter__('roster',	function() { return roster;	});
 	this.__defineSetter__('roster', function(){});
 
-	this.__defineGetter__(
-		'rooms',
-		function() {
-			return rooms;
-		}
-	);
+	this.__defineGetter__('rooms', function() {	return rooms; });
 	this.__defineSetter__('rooms', function(){});
 
 	this.joinRoom = function(roomJID) {
@@ -157,7 +141,8 @@ var Session = function(options) {
 				"presence",
 				{	'contact' : contact,
 					'show' : roster[contact].show,
-					'status' : roster[contact].status
+					'status' : roster[contact].status,
+					'online' : roster[contact].online
 				}
 			);
 		}
