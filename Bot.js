@@ -4,21 +4,7 @@ var	Session = require("./Session.js"),
 
 var Bot = function(settings) {
 
-	var initModules = function(modules) {
-		var arr = [];
-		if(!Array.isArray(modules))
-			return arr;
-		for(var m in modules) {
-			if(typeof modules[m] != "string")
-				continue;
-			arr.push(
-				require(
-					"./bot_modules/" + modules[m] + "/index.js"
-				)
-			);
-		}
-		return arr;
-	}
+	var self = this;
 
 	var properties = {
 		'name' :
@@ -33,17 +19,25 @@ var Bot = function(settings) {
 			settings.status
 			:
 			"I am a bot",
-		'modules' : initModules(settings.modules)
+		'modules' : [],
+		'sessions' : []
 	};
 
-	var sessions = [];
+	this.addModule = function(module) {
+		if(typeof module != "string")
+			this.emit("error", "Bot.addModule: module name must be string");
+		var botModule = require("./bot_modules/" + module + "/index.js");
+		for(var s in properties.sessions)
+			botModule.call(properties.sessions[s]);
+		properties.modules.push(botModule);
+	}
 
 	this.addSession = function(options) {
 		options.server.alias = properties.name;
 		options.server.status = properties.status;
 		var session = new Session(options.server);
 		for(var m in properties.modules)
-			var module = properties.modules[m].call(session);
+			properties.modules[m].call(session);
 		session.on(
 			'online',
 			function() {
@@ -53,12 +47,12 @@ var Bot = function(settings) {
 				}
 			}
 		);
-		sessions.push(session);
+		properties.sessions.push(session);
 	}
 
 	this.init = function() {
-		for(var s in sessions)
-			sessions[s].init();
+		for(var s in properties.sessions)
+			properties.sessions[s].init();
 	}
 
 }
