@@ -25,7 +25,7 @@ var Bot = function(settings) {
 
 	this.addModule = function(module) {
 		if(typeof module != "string")
-			this.emit("error", "Bot.addModule: module name must be string");
+			this.emit("error", "Bot.addModule: module name must be string.");
 		var botModule = require("./bot_modules/" + module + "/index.js");
 		for(var s in properties.sessions)
 			botModule.call(properties.sessions[s]);
