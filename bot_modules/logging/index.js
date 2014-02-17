@@ -1,12 +1,12 @@
 var Logging = function() {
 	var self = this;
-	self.on(
+	this.on(
 		"online",
 		function() {
 			console.log(self.jid + " online");
 		}
 	);
-	self.on(
+	this.on(
 		"message",
 		function(message) {
 			console.log("-Message-");
@@ -14,7 +14,7 @@ var Logging = function() {
 			console.log("Body: " + message.body);
 		}
 	);
-	self.on(
+	this.on(
 		"presence",
 		function(presence) {
 			console.log("-Presence Update-");

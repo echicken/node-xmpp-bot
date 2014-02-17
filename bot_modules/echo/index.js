@@ -1,6 +1,6 @@
 var Echo = function() {
 	var self = this;
-	self.on(
+	this.on(
 		"message",
 		function(message) {
 			self.say(
