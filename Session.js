@@ -11,6 +11,7 @@ var Session = function(options) {
 		client;
 
 	var settings = {
+		'name' : "",
 		'username' : "",
 		'alias' : "",
 		'password' : "",
@@ -20,6 +21,16 @@ var Session = function(options) {
 		'register' : false,
 		'status' : ""
 	}
+
+	this.__defineGetter__("name", function() { return settings.name; });
+	this.__defineSetter__(
+		"name",
+		function(name) {
+			if(typeof name != "string")
+				self.emit("error", "Session.name must be a string.");
+			settings.name = name;
+		}
+	);
 
 	this.__defineGetter__(
 		'jid',
@@ -175,21 +186,26 @@ var Session = function(options) {
 	var initSettings = function(options) {
 		for(var o in options) {
 			if(typeof settings[o] != typeof options[o]) {
-				throw util.format(
-					"Session: Type mismatch: %s must be %s",
-					o, typeof settings[o]
+				self.emit(
+					"error",
+					util.format(
+						"Session.%s must be %s.",
+						o, typeof settings[o]
+					)
 				);
 			}
 			settings[o] = options[o];
 		}
 		if(settings.username == "")
-			throw "Session: Invalid username";
+			self.emit("error", "Session.username cannot be empty.");
 		if(settings.password == "")
-			throw "Session: Invalid password";
+			self.emit("error", "Session.password cannot be empty.");
 		if(settings.hostname == "")
-			throw "Session: Invalid hostname";
+			self.emit("error", "Session.hostname cannot be empty.");
 		if(settings.alias == "")
 			settings.alias = settings.username;
+		if(settings.name == "")
+			settings.name = settings.hostname;
 	}
 
 	var initClient = function() {
