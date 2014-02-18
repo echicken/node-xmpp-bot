@@ -1,4 +1,5 @@
 var	Session = require("./Session.js"),
+	Module = require("./Module.js"),
 	util = require("util"),
 	events = require("events");
 
@@ -23,13 +24,12 @@ var Bot = function(settings) {
 		'sessions' : []
 	};
 
-	this.addModule = function(module) {
-		if(typeof module != "string")
+	this.addModule = function(moduleName) {
+		if(typeof moduleName != "string")
 			this.emit("error", "Bot.addModule: module name must be string.");
-		var botModule = require("./bot_modules/" + module + "/index.js");
 		for(var s in properties.sessions)
-			botModule.call(properties.sessions[s]);
-		properties.modules.push(botModule);
+			new Module(moduleName, properties.sessions[s]);
+		properties.modules.push(moduleName);
 	}
 
 	this.addSession = function(options) {
@@ -37,7 +37,7 @@ var Bot = function(settings) {
 		options.server.status = properties.status;
 		var session = new Session(options.server);
 		for(var m in properties.modules)
-			properties.modules[m].call(session);
+			new Module(properties.modules[m], session);
 		session.on(
 			'online',
 			function() {

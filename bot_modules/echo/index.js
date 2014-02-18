@@ -1,14 +1,9 @@
-var Echo = function() {
-	var self = this;
-	this.on(
-		"message",
-		function(message) {
-			self.say(
-				message.from,
-				"You said: " + message.body
-			);
-		}
-	)
+var Echo = function(options) {
+
+	this.onMessage = function(message) {
+		this.say(message.from, "Echo: " + message.body);
+	}
+
 }
 
-module.exports = Echo;
+module.exports = new Echo();
