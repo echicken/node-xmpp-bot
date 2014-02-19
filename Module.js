@@ -8,7 +8,6 @@ var Module = function(moduleName, session) {
 	if(!(session instanceof Session))
 		this.emit("error", "Module: options.session must be a Session.");
 
-	var session = session;
 	var botModule = new (
 		require("./bot_modules/" + moduleName + "/index.js")
 	)(session);
