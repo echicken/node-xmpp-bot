@@ -110,6 +110,20 @@ Provides the **Session** object, which is essentially a wrapper around **node-xm
 
 #####Properties
 
+* **Session.name** - (String)
+* **Session.jid** - (String, *read only*)
+* **Session.alias** - (String)
+* **Session.status** - (String)
+* **Session.roster** - (Array of contact JID strings, *read only*)
+* **Session.rooms** - (Array of MUC room JID strings, *read only*)
+
 #####Methods
 
+* **Session.joinRoom(roomJID)** - Join room *roomJID*
+* **Session.say(jid, message)** - Say *message* to user/room with JID *jid*
+* **Session.init()** - Initialize and connect to server
+
 #####Usage
+
+```js
+```
