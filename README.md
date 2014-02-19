@@ -5,19 +5,17 @@ An XMPP bot based on node-xmpp-client.
 
 ###Bot.js
 
+Provides the **Bot** object, which draws **Session** and **Module** together to make a working bot.
+
 ####Properties
 
-* **Bot.name**
-The alias / nickname of the bot. (String)
-* **Bot.status**
-The bot's status message. (String)
+* **Bot.name** - The alias / nickname of the bot. (String)
+* **Bot.status** - The bot's status message. (String)
 
 ####Methods
 
-* **Bot.addModule(moduleName)**
-Add module <moduleName> to the bot, where <moduleName> references the name of a subdirectory of bot_modules.
-* **Bot.addSession(options)**
-Add a client-to-server session to the bot, configured via the <options> object-as-argument (see example.)
+* **Bot.addModule(moduleName)** - Add module <moduleName> to the bot, where <moduleName> references the name of a subdirectory of bot_modules.
+* **Bot.addSession(options)** - Add a client-to-server session to the bot, configured via the <options> object-as-argument (see example.)
 
 ####Usage
 
