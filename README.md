@@ -107,3 +107,9 @@ And as you might expect, it echoes back whatever text another user sends to it.
 Provides the **Session** object, which is essentially a wrapper around **node-xmpp-client**.  **Session** provides a simple API for creating an overly-simplified XMPP client session.
 
 ####The Session object
+
+#####Properties
+
+#####Methods
+
+#####Usage
