@@ -24,17 +24,63 @@ var Bot = function(settings) {
 		'sessions' : []
 	};
 
+	this.__defineGetter__(
+		"name",
+		function() {
+			return properties.name;
+		}
+	);
+
+	this.__defineSetter__(
+		"name",
+		function(name) {
+			if(typeof name != "string")
+				self.emit("error", "Bot.name must be a string.")
+			for(var s in properties.sessions)
+				properties.sessions[s].alias = name;
+		}
+	);
+
+	this.__defineGetter__(
+		"status",
+		function() {
+			return properties.status;
+		}
+	);
+
+	this.__defineSetter__(
+		"status",
+		function(status) {
+			if(typeof status != "string")
+				self.emit("error", "Bot.status must be a string.");
+			for(var s in properties.sessions)
+				properties.sessions[s].status = status;
+		}
+	);
+
 	this.addModule = function(moduleName) {
 		if(typeof moduleName != "string")
-			this.emit("error", "Bot.addModule: module name must be string.");
+			this.emit("error", "Bot.addModule: module name must be a string.");
 		for(var s in properties.sessions)
 			new Module(moduleName, properties.sessions[s]);
 		properties.modules.push(moduleName);
 	}
 
 	this.addSession = function(options) {
-		options.server.alias = properties.name;
-		options.server.status = properties.status;
+		options.server.alias = (
+			(typeof options.alias == "undefined")
+			?
+			properties.name
+			:
+			options.alias
+		);
+		options.server.status = (
+			(typeof options.status == "undefined")
+			?
+			properties.status
+			:
+			options.status
+		);
 		var session = new Session(options.server);
 		for(var m in properties.modules)
 			new Module(properties.modules[m], session);

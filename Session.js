@@ -33,16 +33,33 @@ var Session = function(options) {
 	);
 
 	this.__defineGetter__(
-		'jid',
+		"jid",
 		function() {
 			return settings.username + "@" + settings.hostname;
 		}
 	);
-	this.__defineSetter__('jid', function(){});
+	this.__defineSetter__("jid", function(){});
 
-	this.__defineGetter__('status',	function() { return settings.status; });
+	this.__defineGetter__(
+		"alias",
+		function() {
+			return settings.alias;
+		}
+	);
+
+	// This is obviously incomplete.
 	this.__defineSetter__(
-		'status',
+		"alias",
+		function(alias) {
+			if(typeof alias != "string")
+				self.emit("error", "Session.alias must be a string.");
+			settings.alias = alias;
+		}
+	);
+
+	this.__defineGetter__("status",	function() { return settings.status; });
+	this.__defineSetter__(
+		"status",
 		function(status) {
 			settings.status = status;
 			client.send(
