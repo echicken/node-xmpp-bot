@@ -135,7 +135,7 @@ var session = new Session(
 		'hostname' : <String: The 'hostname' portion of this client's JID>,
 		'port' : <Number: The port to connect to, defaults to 5222>,
 		'reconnect' : <Boolean: Automatically reconnect, defaults to true>,
-		'register' : <Boolean: Register a new account with the server, defaults to false>,
+		'register' : <Boolean: Register new account with server, default is false>,
 		'status' : <String: This client's 'status' message>
 	}
 );
