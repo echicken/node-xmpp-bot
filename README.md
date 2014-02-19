@@ -22,7 +22,7 @@ Provides the **Bot** object, which draws **Session** and **Module** together to 
 #####Usage
 
 ```js
-var Bot = require("path/to/Bot.js");
+var Bot = require("/path/to/Bot.js");
 var bot = new Bot(
 	{	'name' : "node.js XMPP Bot",
 		'status' : "I are bot yesno?"
@@ -65,17 +65,17 @@ Upon a successful connection to a server, a call will be made to a module's **on
 Upon the receipt of an incoming message, a call will be made to a module's **onMessage** method, if it exists.  That method will be supplied with a *message* object, which will take the following form:
 
 ```js
-{	'from' : <JID of sender>,
-	'body' : <Text of message>
+{	'from' : <String: JID of sender>,
+	'body' : <String: Text of message>
 }
 ```
 
 Upon the receipt of a presence update, a call will be made to a module's **onPresence** method, if it is defined.  That method will be supplied with a *presence* object, which will take the following form:
 
 ```js
-{	'contact' : <JID of user>,
-	'show' : <Text of a presence stanza's <show> element>,
-	'status' : <The user's status>,
+{	'contact' : <String: JID of user>,
+	'show' : <String: Text of a presence stanza's <show> element>,
+	'status' : <String: The user's status>,
 	'online' : <Boolean, whether the user is currently online or not>
 }
 ```
@@ -104,7 +104,7 @@ And as you might expect, it echoes back whatever text another user sends to it.
 
 ###Session.js
 
-Provides the **Session** object, which is essentially a wrapper around **node-xmpp-client**.  **Session** provides a simple API for creating an overly-simplified XMPP client session.
+Provides the **Session** object, which is essentially a wrapper around **node-xmpp-client**.  **Session** provides a simple API for creating an overly-simplified XMPP client session.  Could be used on its own if you want to implement your own simple XMPP client, but you should disregard this section otherwise.
 
 ####The Session object
 
@@ -126,4 +126,17 @@ Provides the **Session** object, which is essentially a wrapper around **node-xm
 #####Usage
 
 ```js
+var Session = require("/path/to/Session.js");
+var session = new Session(
+	{	'name' : <String: A convenient name for this session>,
+		'username' : <String: The 'username' portion of this client's JID>,
+		'alias' : <String: The alias or nickname for this client>,
+		'password' : <String: The password for this user's account>,
+		'hostname' : <String: The 'hostname' portion of this client's JID>,
+		'port' : <Number: The port to connect to, defaults to 5222>,
+		'reconnect' : <Boolean: Automatically reconnect, defaults to true>,
+		'register' : <Boolean: Register a new account with the server, defaults to false>,
+		'status' : <String: This client's 'status' message>
+	}
+);
 ```
