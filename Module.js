@@ -1,4 +1,6 @@
-var Session = require("./Session.js");
+var Session = require("./Session.js"),
+	events = require("events"),
+	util = require("util");
 
 var Module = function(moduleName, session) {
 
@@ -37,5 +39,6 @@ var Module = function(moduleName, session) {
 	);
 
 }
+util.inherits(Module, events.EventEmitter);
 
 module.exports = Module;
