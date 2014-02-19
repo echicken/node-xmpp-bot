@@ -7,17 +7,19 @@ An XMPP bot based on node-xmpp-client.
 
 Provides the **Bot** object, which draws **Session** and **Module** together to make a working bot.
 
-####Properties
+####The Bot object
+
+#####Properties
 
 * **Bot.name** - The alias / nickname of the bot. (String)
 * **Bot.status** - The bot's status message. (String)
 
-####Methods
+#####Methods
 
 * **Bot.addModule(moduleName)** - Add module *moduleName* to the bot, where *moduleName* references the name of a subdirectory of bot_modules.
 * **Bot.addSession(options)** - Add a client-to-server session to the bot, configured via the *options* object-as-argument (see example.)
 
-####Usage
+#####Usage
 
 ```js
 var Bot = require("path/to/Bot.js");
@@ -63,18 +65,18 @@ Upon a successful connection to a server, a call will be made to a module's **on
 Upon the receipt of an incoming message, a call will be made to a module's **onMessage** method, if it exists.  That method will be supplied with a *message* object, which will take the following form:
 
 ```js
-{	'from' : *JID of sender*,
-	'body' : *Text of message*
+{	'from' : <JID of sender>,
+	'body' : <Text of message>
 }
 ```
 
 Upon the receipt of a presence update, a call will be made to a module's **onPresence** method, if it is defined.  That method will be supplied with a *presence* object, which will take the following form:
 
 ```js
-{	'contact' : *JID of user*,
-	'show' : *Text of a presence stanza's <show> element*,
-	'status' : *The user's status*,
-	'online' : *Boolean, whether the user is currently online or not*
+{	'contact' : <JID of user>,
+	'show' : <Text of a presence stanza's <show> element>,
+	'status' : <The user's status>,
+	'online' : <Boolean, whether the user is currently online or not>
 }
 ```
 
@@ -99,3 +101,9 @@ bot.addModule("echo");
 ```
 
 And as you might expect, it echoes back whatever text another user sends to it.
+
+###Session.js
+
+Provides the **Session** object, which is essentially a wrapper around **node-xmpp-client**.  **Session** provides a simple API for creating an overly-simplified XMPP client session.
+
+####The Session object
