@@ -1,7 +1,7 @@
-var Logging = function(options) {
+var Logging = function(session) {
 
 	this.onConnect = function() {
-		console.log(this.jid + " online.");
+		console.log(session.jid + " online.");
 	}
 
 	this.onMessage = function(message) {
@@ -19,4 +19,4 @@ var Logging = function(options) {
 	}
 }
 
-module.exports = new Logging();
+module.exports = Logging;

@@ -20,7 +20,7 @@ var Session = function(options) {
 		'reconnect' : true,
 		'register' : false,
 		'status' : ""
-	}
+	};
 
 	this.__defineGetter__("name", function() { return settings.name; });
 	this.__defineSetter__(

@@ -1,9 +1,9 @@
-var Echo = function(options) {
+var Echo = function(session) {
 
 	this.onMessage = function(message) {
-		this.say(message.from, "Echo: " + message.body);
+		session.say(message.from, "Echo: " + message.body);
 	}
 
 }
 
-module.exports = new Echo();
+module.exports = Echo;
