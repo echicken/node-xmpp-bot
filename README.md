@@ -110,12 +110,12 @@ Provides the **Session** object, which is essentially a wrapper around **node-xm
 
 #####Properties
 
-* **Session.name** - (String)
-* **Session.jid** - (String, *read only*)
-* **Session.alias** - (String)
-* **Session.status** - (String)
-* **Session.roster** - (Array of contact JID strings, *read only*)
-* **Session.rooms** - (Array of MUC room JID strings, *read only*)
+* **Session.name** - A name for this session, for convenience only. (String)
+* **Session.jid** - The JID of the user account connected to the server. (String, *read only*)
+* **Session.alias** - The alias/nickname for this account. (String)
+* **Session.status** - The status message for this account. (String)
+* **Session.roster** - Contact list. (Array of contact JID strings, *read only*)
+* **Session.rooms** - Rooms this account is joined to. (Array of MUC room JID strings, *read only*)
 
 #####Methods
 
