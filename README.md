@@ -43,3 +43,11 @@ bot.addSession(
 	}
 );
 ```
+
+###Module.js
+
+Provides the **Module** object, which you do not need to reference directly.  Instead, let's talk about **Modules**
+
+###Modules
+
+*This part of the documentation will see some updates as module options get fleshed out.*
