@@ -13,7 +13,13 @@ npm install
 
 ###Configuration
 
-Edit the included **config.js** file to suit your needs.
+Edit the included **config.js** file to suit your needs.  It's essentially JSON, so keep an eye on syntax.  Most options are self-explanatory.
+
+Note that **servers** and **modules** are arrays of object literals.  **servers** is a list of servers to connect to (and options to apply to each session,) and **modules** is a list of modules to load into the bot (from the **bot_modules** subdirectory.)
+
+An object in the **servers** array has two properties at its top level: **server** and **rooms**, where **server** is in turn an object, and **rooms** is an array of strings.  To see valid sub-properties of the **server** property, look at the **Session** documentation below.  The **rooms** array is simply a list of the JIDs of multi-user chat rooms the bot should join upon connecting to the server.
+
+An object in the **modules** array must have a **name** property, which is a reference to a subdirectory of **bot_modules**.  It may also have a **servers** property, which must be an array of strings, each string being a reference to a server's **server.name** property; this list controls which servers the module will be active on.  You may also include a **JIDs** property, which must be an array of JIDs that the bot is allowed to send messages to.  If you omit **servers**, the bot will connect to all servers.  If you omit **JIDs**, the bot will be permitted to send messages to all users.
 
 ```js
 module.exports = {
@@ -25,6 +31,7 @@ module.exports = {
 				'username' : "example",
 				'password' : "3x4mpl3",
 				'hostname' : "example.jabber.server.hostname",
+				'port' : 5222
 			},
 			'rooms' : [
 				'exampleRoom@conference.example.jabber.server.hostname'
