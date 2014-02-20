@@ -16,7 +16,7 @@ Provides the **Bot** object, which draws **Session** and **Module** together to 
 
 #####Methods
 
-* **Bot.addModule(moduleName)** - Add module *moduleName* to the bot, where *moduleName* references the name of a subdirectory of bot_modules.
+* **Bot.addModule({ 'name' : *moduleName* })** - Add module *moduleName* to the bot, where *moduleName* references the name of a subdirectory of bot_modules. (See example for additional options.)
 * **Bot.addSession(options)** - Add a client-to-server session to the bot, configured via the *options* object-as-argument (see example.)
 
 #####Usage
@@ -28,8 +28,14 @@ var bot = new Bot(
 		'status' : "I are bot yesno?"
 	}
 );
-bot.addModule("logging");
-bot.addModule("echo");
+bot.addModule({ 'name' : "logging" });
+bot.addModule(
+	{	'name' : "echo",
+		'servers' : [
+			"FakeServer"
+		]
+	}
+);
 bot.addSession(
 	{	'server' : {
 			'name' : "FakeServer",
@@ -54,7 +60,7 @@ Provides the **Module** object, which you do not need to reference directly.  In
 
 *This part of the documentation will see some updates as module options get fleshed out.*
 
-Bot modules reside in subdirectories of the **bot_modules** directory, and are loaded into the bot by calling *bot*.addModule(*name*), where *name* is the name of a module's directory.  A bot module directory must contain a file named *index.js*, which defines and exports an object.
+Bot modules reside in subdirectories of the **bot_modules** directory, and are loaded into the bot by calling *bot*.addModule({ 'name' : *name* }), where *name* is the name of a module's directory.  A bot module directory must contain a file named *index.js*, which defines and exports an object.
 
 A separate instance of each bot module exists for each server that the bot is connected to.
 
