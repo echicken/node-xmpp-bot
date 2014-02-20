@@ -3,6 +3,49 @@ node-xmpp-bot
 
 An XMPP bot based on node-xmpp-client.
 
+###Installation
+
+```sh
+git clone https://github.com/echicken/node-xmpp-bot.git
+```
+
+###Configuration
+
+Edit the included **config.js** file to suit your needs.
+
+```js
+module.exports = {
+	'name' : "Jabber Bot",
+	'status' : "I am a bot",
+	'servers' : [
+		{	'server' : {
+				'name' : "example",
+				'username' : "example",
+				'password' : "3x4mpl3",
+				'hostname' : "example.jabber.server.hostname",
+			},
+			'rooms' : [
+				'exampleRoom@conference.example.jabber.server.hostname'
+			]
+		}
+	],
+	'modules' : [
+		{	'name' : "echo",
+			'servers' : [
+				"example"
+			]
+		},
+		{ 'name' : "logging" }
+	]
+};
+```
+
+###Usage
+
+```sh
+node index.js
+```
+
 ###Bot.js
 
 Provides the **Bot** object, which draws **Session** and **Module** together to make a working bot.
