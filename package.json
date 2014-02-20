@@ -14,8 +14,7 @@
 	},
 	"dependencies" : {
 		"ltx" : "*",
-		"node-xmpp-client" : "*",
-		"iniparser" : "*"
+		"node-xmpp-client" : "*"
 	},
 	"engines" : {
 		"node" : ">= 0.10.24"
