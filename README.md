@@ -7,6 +7,8 @@ An XMPP bot based on node-xmpp-client.
 
 ```sh
 git clone https://github.com/echicken/node-xmpp-bot.git
+cd node-xmpp-bot
+npm install
 ```
 
 ###Configuration
