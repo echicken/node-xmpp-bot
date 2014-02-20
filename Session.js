@@ -261,10 +261,8 @@ var Session = function(options) {
 
 	}
 
-	this.init = function() {
-		initSettings(options);
-		initClient();
-	}
+	initSettings(options);
+	initClient();
 
 }
 util.inherits(Session, events.EventEmitter);

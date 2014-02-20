@@ -7,7 +7,7 @@
 			"email" : "echicken@electronicchicken.com"
 		}
 	],
-	"main" : "Bot.js",
+	"main" : "index.js",
 	"repository" : {
 		"type" : "git",
 		"url" : "https://github.com/echicken/node-xmpp-bot.git"

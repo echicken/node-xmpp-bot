@@ -96,11 +96,6 @@ var Bot = function(settings) {
 		properties.sessions.push(session);
 	}
 
-	this.init = function() {
-		for(var s in properties.sessions)
-			properties.sessions[s].init();
-	}
-
 }
 util.inherits(Bot, events.EventEmitter);
 
