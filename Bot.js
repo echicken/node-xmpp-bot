@@ -62,8 +62,8 @@ var Bot = function(settings) {
 		if(typeof options.name != "string")
 			this.emit("error", "Bot.addModule: module name must be a string.");
 		for(var s in properties.sessions)
-			new Module(options.name, properties.sessions[s]);
-		properties.modules.push(options.name);
+			new Module(options, properties.sessions[s]);
+		properties.modules.push(options);
 	}
 
 	this.addSession = function(options) {

@@ -2,16 +2,25 @@ var Session = require("./Session.js"),
 	events = require("events"),
 	util = require("util");
 
-var Module = function(moduleName, session) {
+var Module = function(options, session) {
 
-	if(typeof moduleName != "string")
+	if(typeof options.name != "string")
 		this.emit("error", "Module: options.name must be a string.");
 
 	if(!(session instanceof Session))
 		this.emit("error", "Module: options.session must be a Session.");
 
+	if(	typeof options.servers != undefined
+		&&
+		Array.isArray(options.servers)
+		&&
+		options.servers.indexOf(session.name) < 0
+	) {
+		return;
+	}
+
 	var botModule = new (
-		require("./bot_modules/" + moduleName + "/index.js")
+		require("./bot_modules/" + options.name + "/index.js")
 	)(session);
 
 	session.on(
@@ -25,6 +34,14 @@ var Module = function(moduleName, session) {
 	session.on(
 		"message",
 		function(message) {
+			if(	typeof options.JIDs != "undefined"
+				&&
+				Array.isArray(options.JIDs)
+				&&
+				options.JIDs.indexOf(message.from) < 0
+			) {
+				return;
+			}
 			if(typeof botModule.onMessage == "function")
 				botModule.onMessage(message);
 		}
