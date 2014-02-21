@@ -155,7 +155,7 @@ module.exports = Echo;
 Since the module resides in the **echo** subdirectory of the **bot_modules** directory, you could load it into your bot as follows:
 
 ```js
-bot.addModule("echo");
+bot.addModule({ 'name' : "echo" });
 ```
 
 And as you might expect, it echoes back whatever text another user sends to it.
