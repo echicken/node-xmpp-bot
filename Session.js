@@ -184,6 +184,8 @@ var Session = function(options) {
 			typeof stanza.getChild("delay") != "undefined"
 			||
 			stanza.attrs.from.split("/")[1] == settings.alias
+			||
+			stanza.attrs.from.split("/")[0] == self.jid
 		) {
 			return;
 		}
